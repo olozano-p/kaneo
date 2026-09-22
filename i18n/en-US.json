@@ -204,7 +204,8 @@
 			"emailPlaceholder": "me@example.com",
 			"passwordPlaceholder": "••••••••",
 			"showPassword": "Show password",
-			"hidePassword": "Hide password"
+			"hidePassword": "Hide password",
+			"forgotPassword": "Forgot password?"
 		},
 		"checkEmail": {
 			"pageTitle": "Check Your Email",
@@ -272,6 +273,32 @@
 			"passwordTooShort": "Password is too short",
 			"creatingAccount": "Creating Account...",
 			"createAccount": "Create Account"
+		},
+		"forgotPassword": {
+			"pageTitle": "Forgot Password",
+			"title": "Forgot your password?",
+			"subtitle": "We'll email you a link to set a new one",
+			"sending": "Sending...",
+			"sendResetLink": "Send reset link",
+			"backToSignIn": "Back to sign in",
+			"sentTitle": "Check your email",
+			"sentMessage": "If an account exists for <email>{{email}}</email>, a reset link is on its way. It expires in one hour."
+		},
+		"resetPassword": {
+			"pageTitle": "Reset Password",
+			"title": "Set a new password",
+			"subtitle": "Choose a password you don't use anywhere else",
+			"newPassword": "New password",
+			"confirmPassword": "Confirm password",
+			"passwordTooShort": "Password is too short",
+			"passwordMismatch": "Passwords don't match",
+			"resetting": "Saving...",
+			"resetPassword": "Save new password",
+			"passwordResetSuccess": "Password updated. Sign in with your new password.",
+			"failedReset": "Failed to reset password",
+			"invalidLinkTitle": "This link is no longer valid",
+			"invalidLinkMessage": "Reset links expire after one hour and can only be used once. Request a new one to continue.",
+			"requestNewLink": "Request a new link"
 		},
 		"invitation": {
 			"pageTitleAccept": "Accept Invitation",

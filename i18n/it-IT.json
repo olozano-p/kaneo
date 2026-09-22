@@ -204,7 +204,8 @@
 			"emailPlaceholder": "me@esempio.com",
 			"passwordPlaceholder": "••••••••",
 			"showPassword": "Mostra password",
-			"hidePassword": "Nascondi password"
+			"hidePassword": "Nascondi password",
+			"forgotPassword": "Forgot password?"
 		},
 		"checkEmail": {
 			"pageTitle": "Controlla la tua Email",
@@ -340,6 +341,32 @@
 				"nameRequired": "Il nome è obbligatorio",
 				"nameShort": "Il nome deve essere di almeno 2 caratteri"
 			}
+		},
+		"forgotPassword": {
+			"backToSignIn": "Back to sign in",
+			"pageTitle": "Forgot Password",
+			"sending": "Sending...",
+			"sendResetLink": "Send reset link",
+			"sentMessage": "If an account exists for <email>{{email}}</email>, a reset link is on its way. It expires in one hour.",
+			"sentTitle": "Check your email",
+			"subtitle": "We'll email you a link to set a new one",
+			"title": "Forgot your password?"
+		},
+		"resetPassword": {
+			"confirmPassword": "Confirm password",
+			"failedReset": "Failed to reset password",
+			"invalidLinkMessage": "Reset links expire after one hour and can only be used once. Request a new one to continue.",
+			"invalidLinkTitle": "This link is no longer valid",
+			"newPassword": "New password",
+			"pageTitle": "Reset Password",
+			"passwordMismatch": "Passwords don't match",
+			"passwordResetSuccess": "Password updated. Sign in with your new password.",
+			"passwordTooShort": "Password is too short",
+			"requestNewLink": "Request a new link",
+			"resetPassword": "Save new password",
+			"resetting": "Saving...",
+			"subtitle": "Choose a password you don't use anywhere else",
+			"title": "Set a new password"
 		}
 	},
 	"settings": {

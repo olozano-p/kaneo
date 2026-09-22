@@ -1,4 +1,5 @@
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { Link } from "@tanstack/react-router";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useGetConfig from "@/hooks/queries/config/use-get-config";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "@/lib/toast";
 
@@ -36,6 +38,8 @@ export function SignInForm({ onSuccess, defaultEmail }: SignInFormProps) {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  // Without SMTP the reset mail can never arrive, so don't offer the way out.
+  const { data: config } = useGetConfig();
   const form = useForm<SignInFormValues>({
     resolver: standardSchemaResolver(signInSchema),
     defaultValues: {
@@ -129,6 +133,16 @@ export function SignInForm({ onSuccess, defaultEmail }: SignInFormProps) {
                   </div>
                 </FormControl>
                 <FormMessage />
+                {config?.hasSmtp ? (
+                  <div className="flex justify-end">
+                    <Link
+                      to="/auth/forgot-password"
+                      className="text-xs text-muted-foreground hover:text-foreground"
+                    >
+                      {t("auth:forms.forgotPassword")}
+                    </Link>
+                  </div>
+                ) : null}
               </FormItem>
             )}
           />

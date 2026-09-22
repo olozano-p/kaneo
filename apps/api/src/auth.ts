@@ -2,6 +2,7 @@ import { apiKey } from "@better-auth/api-key";
 import {
   sendMagicLinkEmail,
   sendOtpEmail,
+  sendPasswordResetEmail,
   sendWorkspaceInvitationEmail,
 } from "@kaneo/email";
 import {
@@ -133,6 +134,7 @@ function getAuthEmailCopy(locale?: string | null) {
     return {
       magicLinkSubject: "Anmeldelink fuer Kaneo",
       otpSubject: "Bestaetigungscode fuer Kaneo",
+      resetPasswordSubject: "Kaneo-Passwort zuruecksetzen",
     };
   }
 
@@ -140,6 +142,7 @@ function getAuthEmailCopy(locale?: string | null) {
     return {
       magicLinkSubject: "Liên kết đăng nhập Kaneo",
       otpSubject: "Mã xác minh Kaneo",
+      resetPasswordSubject: "Đặt lại mật khẩu Kaneo",
     };
   }
 
@@ -147,12 +150,14 @@ function getAuthEmailCopy(locale?: string | null) {
     return {
       magicLinkSubject: "Kaneo ログインリンク",
       otpSubject: "Kaneo 認証コード",
+      resetPasswordSubject: "Kaneo パスワードの再設定",
     };
   }
 
   return {
     magicLinkSubject: "Login for Kaneo",
     otpSubject: "Authentication code for Kaneo",
+    resetPasswordSubject: "Reset your Kaneo password",
   };
 }
 
@@ -248,6 +253,24 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
+    // Keep in sync with the "expires in 1 hour" line the reset email states.
+    resetPasswordTokenExpiresIn: 3600,
+    // People reset a password precisely when they suspect it leaked, so every
+    // other live session for that user has to go with it.
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url }) => {
+      try {
+        const locale = await getUserLocale(user.email);
+        const copy = getAuthEmailCopy(locale);
+        await sendPasswordResetEmail(user.email, copy.resetPasswordSubject, {
+          resetLink: url,
+          userName: user.name,
+          locale,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
     password: {
       hash: async (password) => {
         return await bcrypt.hash(password, 10);
@@ -568,6 +591,7 @@ export const auth = betterAuth({
     max: 100,
     customRules: {
       "/sign-up/email": { window: 60, max: 3 },
+      "/request-password-reset": { window: 60, max: 3 },
       "/organization/invite-member": { window: 60, max: 5 },
     },
   },

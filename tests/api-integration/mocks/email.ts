@@ -16,6 +16,23 @@ export async function sendOtpEmail(
   return undefined;
 }
 
+// Recorded so password-reset tests can assert the mail was handed off with the
+// link Better Auth built, without reaching for a real SMTP server.
+export const sentPasswordResetEmails: Array<{
+  to: string;
+  subject: string;
+  data: unknown;
+}> = [];
+
+export async function sendPasswordResetEmail(
+  to: string,
+  subject: string,
+  data: unknown,
+): Promise<void> {
+  sentPasswordResetEmails.push({ to, subject, data });
+  return undefined;
+}
+
 export async function sendWorkspaceInvitationEmail(
   _to: string,
   _subject: string,
